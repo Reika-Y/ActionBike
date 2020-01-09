@@ -1,4 +1,7 @@
 ﻿#include "GameScene.h"
+#include "actor/Player.h"
+#include "BackGround.h"
+#include "Stage.h"
 
 cocos2d::Scene* GameScene::createScene()
 {
@@ -36,11 +39,21 @@ bool GameScene::init()
 	menu->setPosition(cocos2d::Vec2::ZERO);
 	this->addChild(menu, 1);
 
-	auto sp = cocos2d::Sprite::create("img/bike1.png");
-	sp->setAnchorPoint(cocos2d::Vec2::ANCHOR_BOTTOM_LEFT);
-	sp->setPosition(cocos2d::Vec2(300, 300));
-	this->addChild(sp);
+	//auto sp = cocos2d::Sprite::create("img/bike1.png");
+	//sp->setAnchorPoint(cocos2d::Vec2::ANCHOR_BOTTOM_LEFT);
+	//sp->setPosition(cocos2d::Vec2(300, 300));
+	//this->addChild(sp);
 
+	auto bg = BackGround::create();
+	bg->AddImage("img/Environment/background.png", 1.f);
+	bg->AddImage("img/Environment/middleground.png", 2.f);
+	addChild(bg);
+
+	auto stage = Stage::createStage("test");
+	addChild(stage);
+
+	auto player = Player::create();
+	addChild(player);
 	return true;
 }
 

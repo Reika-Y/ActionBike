@@ -1,12 +1,13 @@
 ﻿#pragma once
 #include <cocos2d.h>
-#include "AnimInfo.h"
+#include "input/InputBase.h"
 
 class Actor:public cocos2d::Sprite
 {
 public:
 private:
 protected:
-	AnimInfo _anim;
+	int _speed;
+	InputBase* _input = nullptr;
 };
 

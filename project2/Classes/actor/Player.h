@@ -7,6 +7,7 @@ class Player :
 public:
 	bool init(void)override;
 	CREATE_FUNC(Player);
+	void update(float dt)override;
 private:
 	Player(){}
 };
