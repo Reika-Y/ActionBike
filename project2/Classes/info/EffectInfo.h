@@ -3,7 +3,7 @@
 #include <map>
 #include <string>
 #include <list>
-#include "Effekseer.h"
+#include "../effekseer/Effekseer.h"
 
 using EffectList =std::map<std::string, efk::Effect*>;
 

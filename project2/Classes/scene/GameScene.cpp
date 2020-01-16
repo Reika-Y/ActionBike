@@ -1,7 +1,7 @@
 ﻿#include "GameScene.h"
-#include "actor/Player.h"
 #include "BackGround.h"
-#include "Stage.h"
+#include "ResultScene.h"
+#include "../info/ScoreInfo.h"
 
 cocos2d::Scene* GameScene::createScene()
 {
@@ -37,27 +37,58 @@ bool GameScene::init()
 	}
 	auto menu = cocos2d::Menu::create(closeItem, NULL);
 	menu->setPosition(cocos2d::Vec2::ZERO);
-	this->addChild(menu, 1);
+	this->addChild(menu, 10);
 
-	//auto sp = cocos2d::Sprite::create("img/bike1.png");
-	//sp->setAnchorPoint(cocos2d::Vec2::ANCHOR_BOTTOM_LEFT);
-	//sp->setPosition(cocos2d::Vec2(300, 300));
-	//this->addChild(sp);
+	player = Player::create();
+	addChild(player,1);
 
-	auto bg = BackGround::create();
-	bg->AddImage("img/Environment/background.png", 1.f);
-	bg->AddImage("img/Environment/middleground.png", 2.f);
+	addChild(ScoreInfo::getInstance(),10);
+
+	{
+		//auto camera = cocos2d::Camera::create();
+	}
+
+	scheduleUpdate();
+
+	return true;
+}
+
+void GameScene::SetStage(StageInfo info)
+{
+	auto bg = cocos2d::Sprite::create(info.bgName);
+	bg->setAnchorPoint(cocos2d::Vec2::ANCHOR_BOTTOM_LEFT);
 	addChild(bg);
 
-	auto stage = Stage::createStage("test");
-	addChild(stage);
-
-	auto player = Player::create();
-	addChild(player);
-	return true;
+	_stage = Stage::createStage(info.stage,player);
+	addChild(_stage);
 }
 
 void GameScene::menuCloseCallback(cocos2d::Ref* pSender)
 {
 	cocos2d::Director::getInstance()->end();
+}
+
+void GameScene::isGoal(bool flag)
+{
+	_isGoal = flag;
+}
+
+void GameScene::update(float dt)
+{
+	// ゴールした時
+	//if (_isGoal)
+	//{
+	//	ChangeScene(dt);
+	//}
+	// プレイヤーが死んだ時
+	if (player->isDie())
+	{
+		ChangeScene(dt);
+	}
+}
+
+void GameScene::ChangeScene(float millsecond)
+{
+	auto scene = ResultScene::createScene();
+	cocos2d::Director::getInstance()->replaceScene(scene);
 }

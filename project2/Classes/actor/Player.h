@@ -10,5 +10,7 @@ public:
 	void update(float dt)override;
 private:
 	Player(){}
+	void addModule(void);
+	void addAnim(void);
 };
 

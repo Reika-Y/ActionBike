@@ -6,8 +6,8 @@ class Stage :
 {
 public:
 	// ステージ作成用
-	static Stage* createStage(const std::string& filename);
-	static Stage* createStageWithNumber(int num);
+	static Stage* createStage(const std::string& filename,cocos2d::Node *node);
+	static Stage* createStageWithNumber(int num, cocos2d::Node* node);
 	// 更新
 	void update(float dt)override;
 	CC_SYNTHESIZE_RETAIN(cocos2d::TMXTiledMap*, _tiledMap, TiledMap);
@@ -16,6 +16,6 @@ private:
 protected:
 	Stage();
 	virtual ~Stage();
-	bool init(const std::string& filename);
+	bool init(const std::string& filename, cocos2d::Node*node);
 };
 

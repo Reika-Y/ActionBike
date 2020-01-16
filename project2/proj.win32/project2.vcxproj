@@ -71,14 +71,16 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LibraryPath>$(MSBuildProgramFiles32)\Microsoft SDKs\Windows\v7.1A\lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LibraryPath>D:\ToolFile\cocos2d-x\3.17.2\prebuilt\Release.win32;$(MSBuildProgramFiles32)\Microsoft SDKs\Windows\v7.1A\lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(IncludePath)</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>$(EFFEKSEER_COCOS2D-X_DIR);$(EngineRoot);$(EngineRoot)external;$(EngineRoot)cocos\audio\include;$(EngineRoot)external\chipmunk\include\chipmunk;$(EngineRoot)extensions;..\Classes;..;%(AdditionalIncludeDirectories);$(_COCOS_HEADER_WIN32_BEGIN);$(_COCOS_HEADER_WIN32_END)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(EngineRoot);$(EngineRoot)external;$(EngineRoot)cocos\audio\include;$(EngineRoot)external\chipmunk\include\chipmunk;$(EngineRoot)extensions;..\Classes;..;%(AdditionalIncludeDirectories);$(_COCOS_HEADER_WIN32_BEGIN);$(_COCOS_HEADER_WIN32_END)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;_USE_MATH_DEFINES;GL_GLEXT_PROTOTYPES;CC_ENABLE_CHIPMUNK_INTEGRATION=1;COCOS2D_DEBUG=1;_CRT_SECURE_NO_WARNINGS;_SCL_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MinimalRebuild>false</MinimalRebuild>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -116,14 +118,14 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)\Resources\" /D /E /I /F /Y
       <Inputs>$(TargetFileName)</Inputs>
     </CustomBuildStep>
     <ClCompile>
-      <AdditionalUsingDirectories Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">D:\ToolFile\Effekseer\EffekseerForCocos2d-x143c\Players\Cocos2d-x_v3;%(AdditionalUsingDirectories)</AdditionalUsingDirectories>
+      <AdditionalUsingDirectories Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(AdditionalUsingDirectories)</AdditionalUsingDirectories>
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
       <Optimization>MaxSpeed</Optimization>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <AdditionalIncludeDirectories>$(EFFEKSEER_COCOS2D-X_DIR);$(EngineRoot);$(EngineRoot)external;$(EngineRoot)cocos\audio\include;$(EngineRoot)external\chipmunk\include\chipmunk;$(EngineRoot)extensions;..\Classes;..;%(AdditionalIncludeDirectories);$(_COCOS_HEADER_WIN32_BEGIN);$(_COCOS_HEADER_WIN32_END)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(EngineRoot);$(EngineRoot)external;$(EngineRoot)cocos\audio\include;$(EngineRoot)external\chipmunk\include\chipmunk;$(EngineRoot)extensions;..\Classes;..;%(AdditionalIncludeDirectories);$(_COCOS_HEADER_WIN32_BEGIN);$(_COCOS_HEADER_WIN32_END)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;_USE_MATH_DEFINES;GL_GLEXT_PROTOTYPES;CC_ENABLE_CHIPMUNK_INTEGRATION=1;_CRT_SECURE_NO_WARNINGS;_SCL_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <FunctionLevelLinking>true</FunctionLevelLinking>
@@ -133,7 +135,7 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)\Resources\" /D /E /I /F /Y
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <DisableSpecificWarnings>4267;4251;4244;%(DisableSpecificWarnings)</DisableSpecificWarnings>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
-      <AdditionalUsingDirectories>D:\ToolFile\Effekseer\EffekseerForCocos2d-x143c\Players\Cocos2d-x_v3;%(AdditionalUsingDirectories)</AdditionalUsingDirectories>
+      <AdditionalUsingDirectories>%(AdditionalUsingDirectories)</AdditionalUsingDirectories>
     </ClCompile>
     <Link>
       <AdditionalDependencies>libcocos2d.lib;libcurl.lib;%(AdditionalDependencies);$(_COCOS_LIB_WIN32_BEGIN);$(_COCOS_LIB_WIN32_END)</AdditionalDependencies>
@@ -155,27 +157,67 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)\Resources\" /D /E /I /F /Y
     </PreLinkEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\Classes\ActionControl.cpp" />
+    <ClCompile Include="..\Classes\action\CollisionCheck.cpp" />
+    <ClCompile Include="..\Classes\action\Fall.cpp" />
+    <ClCompile Include="..\Classes\action\Idle.cpp" />
+    <ClCompile Include="..\Classes\action\InputCheck.cpp" />
+    <ClCompile Include="..\Classes\action\Jump.cpp" />
+    <ClCompile Include="..\Classes\action\Jumping.cpp" />
+    <ClCompile Include="..\Classes\action\ModuleCheck.cpp" />
+    <ClCompile Include="..\Classes\action\Move.cpp" />
+    <ClCompile Include="..\Classes\action\Turn.cpp" />
     <ClCompile Include="..\Classes\actor\Actor.cpp" />
     <ClCompile Include="..\Classes\actor\Player.cpp" />
     <ClCompile Include="..\Classes\AnimInfo.cpp" />
     <ClCompile Include="..\Classes\AppDelegate.cpp" />
     <ClCompile Include="..\Classes\BackGround.cpp" />
-    <ClCompile Include="..\Classes\HelloWorldScene.cpp" />
+    <ClCompile Include="..\Classes\effekseer\Effekseer.cpp" />
+    <ClCompile Include="..\Classes\effekseer\EffekseerNative.cpp" />
+    <ClCompile Include="..\Classes\effekseer\EffekseerRendererNative.cpp" />
+    <ClCompile Include="..\Classes\info\EffectInfo.cpp" />
+    <ClCompile Include="..\Classes\info\ScoreInfo.cpp" />
     <ClCompile Include="..\Classes\input\InputTouch.cpp" />
+    <ClCompile Include="..\Classes\Number.cpp" />
     <ClCompile Include="..\Classes\scene\GameScene.cpp" />
+    <ClCompile Include="..\Classes\scene\PauseScene.cpp" />
+    <ClCompile Include="..\Classes\scene\ResultScene.cpp" />
+    <ClCompile Include="..\Classes\scene\SelectScene.cpp" />
+    <ClCompile Include="..\Classes\scene\TitleScene.cpp" />
     <ClCompile Include="..\Classes\Stage.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\Classes\ActionControl.h" />
+    <ClInclude Include="..\Classes\action\ActionDefinition.h" />
+    <ClInclude Include="..\Classes\action\CollisionCheck.h" />
+    <ClInclude Include="..\Classes\action\Fall.h" />
+    <ClInclude Include="..\Classes\action\Idle.h" />
+    <ClInclude Include="..\Classes\action\InputCheck.h" />
+    <ClInclude Include="..\Classes\action\Jump.h" />
+    <ClInclude Include="..\Classes\action\Jumping.h" />
+    <ClInclude Include="..\Classes\action\ModuleCheck.h" />
+    <ClInclude Include="..\Classes\action\Move.h" />
+    <ClInclude Include="..\Classes\action\Turn.h" />
     <ClInclude Include="..\Classes\actor\Actor.h" />
     <ClInclude Include="..\Classes\actor\Player.h" />
     <ClInclude Include="..\Classes\AnimInfo.h" />
     <ClInclude Include="..\Classes\AppDelegate.h" />
     <ClInclude Include="..\Classes\BackGround.h" />
-    <ClInclude Include="..\Classes\HelloWorldScene.h" />
+    <ClInclude Include="..\Classes\data\StageInfo.h" />
+    <ClInclude Include="..\Classes\effekseer\Effekseer.h" />
+    <ClInclude Include="..\Classes\effekseer\EffekseerNative.h" />
+    <ClInclude Include="..\Classes\effekseer\EffekseerRendererNative.h" />
+    <ClInclude Include="..\Classes\info\EffectInfo.h" />
+    <ClInclude Include="..\Classes\info\ScoreInfo.h" />
     <ClInclude Include="..\Classes\input\InputBase.h" />
     <ClInclude Include="..\Classes\input\InputTouch.h" />
+    <ClInclude Include="..\Classes\Number.h" />
     <ClInclude Include="..\Classes\scene\GameScene.h" />
+    <ClInclude Include="..\Classes\scene\PauseScene.h" />
+    <ClInclude Include="..\Classes\scene\ResultScene.h" />
+    <ClInclude Include="..\Classes\scene\SelectScene.h" />
+    <ClInclude Include="..\Classes\scene\TitleScene.h" />
     <ClInclude Include="..\Classes\Stage.h" />
     <ClInclude Include="main.h" />
   </ItemGroup>
