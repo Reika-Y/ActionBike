@@ -28,6 +28,11 @@ bool TitleScene::init()
 	bg->setAnchorPoint(cocos2d::Vec2::ANCHOR_BOTTOM_LEFT);
 	addChild(bg);
 
+	auto logo = cocos2d::Sprite::create("img/title-logo.png");
+	logo->setAnchorPoint(cocos2d::Vec2::ANCHOR_MIDDLE);
+	logo->setPosition(s_size / 2);
+	addChild(logo);
+
 	return true;
 }
 

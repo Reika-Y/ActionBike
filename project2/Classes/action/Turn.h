@@ -5,5 +5,5 @@
 // 画像反転
 struct Turn
 {
-	bool operator()(cocos2d::Sprite& sp, ActModule& act);
+	bool operator()(cocos2d::Sprite& sp, ActModule& act, float& dt);
 };

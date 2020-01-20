@@ -20,10 +20,10 @@ void ActionControl::AddModeule(ActModule& act)
 
 void ActionControl::Update(cocos2d::Sprite& sp,float dt)
 {
-	auto check = [](cocos2d::Sprite& sp, ActModule& act) {
+	auto check = [](cocos2d::Sprite& sp, ActModule& act,float& dt) {
 		for (auto actFunc : act._actFuncList)
 		{
-			if (!actFunc(sp, act))
+			if (!actFunc(sp, act,dt))
 			{
 				return false;
 			}
@@ -32,33 +32,35 @@ void ActionControl::Update(cocos2d::Sprite& sp,float dt)
 	};
 
 	// 切り替え
-	ACT_ID id = ACT_ID::RUN;
-
-	auto input = dynamic_cast<InputBase*>(dynamic_cast<Player&>(sp).getInput());
-	if (input->IsInput())
+	bool flag = false;
+	for (auto act:actModeule)
 	{
-		id = ACT_ID::JUMP;
-	}
-
-	if (dynamic_cast<Actor*>(&sp)->isJumping())
-	{
-		_oldId = ACT_ID::JUMP;
-	}
-
-	if (check(sp, actModeule[id]))
-	{
-		actModeule[id]._runAct(sp, actModeule[id]);
-		if (check(sp, actModeule[ACT_ID::FALL]) && _oldId != ACT_ID::JUMP)
+		// アイドルは何もしない
+		if (act.first == ACT_ID::IDLE)
 		{
-			actModeule[ACT_ID::FALL]._runAct(sp, actModeule[ACT_ID::FALL]);
+			continue;
+		}
+
+
+		if (check(sp, act.second,dt))
+		{
+			act.second._runAct(sp, act.second,dt);
+			_oldId = act.first;
+			flag = true;
+
+			// ジャンプが終了したときの処理
+			if (_oldId == ACT_ID::JUMPING && !dynamic_cast<Actor&>(sp).isJumping())
+			{
+				actModeule[ACT_ID::FALL]._runAct(sp, actModeule[ACT_ID::FALL], dt);
+				_oldId = ACT_ID::FALL;
+			}
 		}
 	}
-	else
+	if (!flag)
 	{
-		id = ACT_ID::IDLE;
-		actModeule[ACT_ID::IDLE]._runAct(sp, actModeule[ACT_ID::IDLE]);
+		_oldId = ACT_ID::IDLE;
+		actModeule[ACT_ID::IDLE]._runAct(sp, actModeule[ACT_ID::IDLE],dt);
 	}
-	_oldId = id;
 }
 
 ActModule ActionControl::GetOldModule(void)

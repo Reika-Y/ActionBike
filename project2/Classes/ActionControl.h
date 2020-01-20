@@ -5,8 +5,11 @@
 #include <cocos2d.h>
 #include "input/InputBase.h"
 
+// 重力
+const float gravity = 9;
+
 struct ActModule;
-using ActFunc = std::function<bool(cocos2d::Sprite&, ActModule&)>;
+using ActFunc = std::function<bool(cocos2d::Sprite&, ActModule&,float&)>;
 
 // アクション管理用
 enum class ACT_ID

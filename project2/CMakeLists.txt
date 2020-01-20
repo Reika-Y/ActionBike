@@ -29,6 +29,13 @@ set(APP_NAME project2)
 
 project(${APP_NAME})
 
+include(AndroidNdkModules)
+android_ndk_import_module_cpufeatures()
+
+include_directories(D:/ToolFile/cricket/cricket-1.6.7/inc)
+link_directories(D:/ToolFile/cricket/cricket-1.6.7/lib/android/ndk/${ANDROID_ABI}/debug)
+link_libraries(D:/ToolFile/cricket/cricket-1.6.7/lib/android/ndk/${ANDROID_ABI}/debug/libck.a)
+
 set(COCOS2DX_ROOT_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cocos2d)
 set(CMAKE_MODULE_PATH ${COCOS2DX_ROOT_PATH}/cmake/Modules/)
 
@@ -48,25 +55,76 @@ endif()
 
 # add cross-platforms source files and header files 
 list(APPEND GAME_SOURCE
+#action
+     Classes/action/CollisionCheck.cpp
+     Classes/action/Fall.cpp
+     Classes/action/Idle.cpp
+     Classes/action/InputCheck.cpp
+     Classes/action/Jump.cpp
+     Classes/action/Jumping.cpp
+     Classes/action/ModuleCheck.cpp
+     Classes/action/Move.cpp
+     Classes/action/Turn.cpp
+#effekseer
+     Classes/effekseer/Effekseer.cpp
+     Classes/effekseer/EffekseerNative.cpp
+     Classes/effekseer/EffekseerRendererNative.cpp
+#actor
      Classes/actor/Actor.cpp
      Classes/actor/Player.cpp
+#info
+     Classes/info/EffectInfo.cpp
+     Classes/info/ScoreInfo.cpp
+     Classes/info/SoundInfo.cpp
+#input
      Classes/input/InputTouch.cpp
+#scene
      Classes/scene/GameScene.cpp
+     Classes/scene/PauseScene.cpp
+     Classes/scene/ResultScene.cpp
+     Classes/scene/SelectScene.cpp
+     Classes/scene/TitleScene.cpp
+#etc
      Classes/AppDelegate.cpp
-     Classes/HelloWorldScene.cpp
      Classes/BackGround.cpp
      Classes/Stage.cpp
+     Classes/ActionControl.cpp
+     Classes/AnimInfo.cpp
+     Classes/Number.cpp
      )
 list(APPEND GAME_HEADER
+     Classes/action/ActionDefinition.h
+     Classes/action/CollisionCheck.h
+     Classes/action/Fall.h
+     Classes/action/Idle.h
+     Classes/action/InputCheck.h
+     Classes/action/Jump.h
+     Classes/action/Jumping.h
+     Classes/action/ModuleCheck.h
+     Classes/action/Move.h
+     Classes/action/Turn.h
+     Classes/effekseer/Effekseer.h
+     Classes/effekseer/EffekseerNative.h
+     Classes/effekseer/EffekseerRendererNative.h
      Classes/actor/Actor.h
      Classes/actor/Player.h
+     Classes/data/StageInfo.h
+     Classes/info/EffectInfo.h
+     Classes/info/ScoreInfo.h
+     Classes/info/SoundInfo.h
      Classes/input/InputBase.h
      Classes/input/InputTouch.h
      Classes/scene/GameScene.h
+     Classes/scene/PauseScene.h
+     Classes/scene/ResultScene.h
+     Classes/scene/SelectScene.h
+     Classes/scene/TitleScene.h
      Classes/AppDelegate.h
-     Classes/HelloWorldScene.h
      Classes/BackGround.h
      Classes/Stage.h
+     Classes/ActionControl.h
+     Classes/AnimInfo.h
+     Classes/Number.h
      )
 
 if(ANDROID)

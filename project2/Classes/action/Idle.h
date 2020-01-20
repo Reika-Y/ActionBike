@@ -4,5 +4,5 @@
 
 struct Idle
 {
-	bool operator()(cocos2d::Sprite& sp, ActModule& act);
+	bool operator()(cocos2d::Sprite& sp, ActModule& act,float& dt);
 };

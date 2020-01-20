@@ -4,7 +4,7 @@
 #include "../scene/GameScene.h"
 #include "../actor/Actor.h"
 
-bool CollisionCheck::operator()(cocos2d::Sprite& sp, ActModule& act)
+bool CollisionCheck::operator()(cocos2d::Sprite& sp, ActModule& act,float& dt)
 {
 	auto stage = dynamic_cast<GameScene*>(cocos2d::Director::getInstance()->getRunningScene())->getstage();
 	auto layer = stage->getTiledMap()->getLayer("terrain");
@@ -37,6 +37,7 @@ bool CollisionCheck::operator()(cocos2d::Sprite& sp, ActModule& act)
 		n = layer->getTileGIDAt(cocos2d::Vec2(x, y));
 		if (n != 0)
 		{
+			dynamic_cast<Actor&>(sp).isJumping(false);
 			return false;
 		}
 	}

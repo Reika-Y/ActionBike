@@ -44,12 +44,7 @@ bool GameScene::init()
 
 	addChild(ScoreInfo::getInstance(),10);
 
-	{
-		//auto camera = cocos2d::Camera::create();
-	}
-
 	scheduleUpdate();
-
 	return true;
 }
 
@@ -59,8 +54,13 @@ void GameScene::SetStage(StageInfo info)
 	bg->setAnchorPoint(cocos2d::Vec2::ANCHOR_BOTTOM_LEFT);
 	addChild(bg);
 
-	_stage = Stage::createStage(info.stage,player);
+	_stage = Stage::createStage(info.stage, player);
 	addChild(_stage);
+
+	//// プレイヤーの追加
+	//auto data = _stage->getTiledMap()->getObjectGroup("player")->getObject("startPoint");
+	//player->setPositionX(data["x"].asFloat());
+	//player->setPositionY(data["y"].asFloat());
 }
 
 void GameScene::menuCloseCallback(cocos2d::Ref* pSender)

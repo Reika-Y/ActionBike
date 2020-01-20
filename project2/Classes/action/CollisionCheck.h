@@ -5,5 +5,5 @@ struct ActModule;
 
 struct CollisionCheck
 {
-	bool operator()(cocos2d::Sprite& sp, ActModule& act);
+	bool operator()(cocos2d::Sprite& sp, ActModule& act,float& dt);
 };

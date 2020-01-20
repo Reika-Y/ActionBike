@@ -1,7 +1,7 @@
 ﻿#include "ModuleCheck.h"
 #include "../Actor/Actor.h"
 
-bool ModuleCheck::operator()(cocos2d::Sprite& sp, ActModule& act)
+bool ModuleCheck::operator()(cocos2d::Sprite& sp, ActModule& act,float& dt)
 {
 	auto oldModule = dynamic_cast<Actor*>(&sp)->GetActionCtr().GetOldModule();
 

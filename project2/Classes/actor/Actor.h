@@ -31,6 +31,8 @@ public:
 	void isDie(bool flag);
 	bool isJumping(void);
 	void isJumping(bool flag);
+	float accel(void);
+	void accel(float num);
 private:
 protected:
 	explicit Actor();
@@ -38,6 +40,8 @@ protected:
 
 	bool _isDie = false;
 	bool _isJumping = false;
+
+	float _accel = 0.f;
 
 	CornerPoints _corner;
 	ActionControl _act;

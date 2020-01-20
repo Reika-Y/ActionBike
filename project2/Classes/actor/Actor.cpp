@@ -39,6 +39,16 @@ void Actor::isJumping(bool flag)
 	_isJumping = flag;
 }
 
+float Actor::accel(void)
+{
+	return _accel;
+}
+
+void Actor::accel(float num)
+{
+	_accel = num;
+}
+
 void Actor::SetCornerPoint(cocos2d::Rect rect)
 {
 	_corner[static_cast<int>(CORNER_POINT::LD)] = rect.origin + _position + cocos2d::Vec2(-1, 1);

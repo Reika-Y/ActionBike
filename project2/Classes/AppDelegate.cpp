@@ -23,7 +23,6 @@
  ****************************************************************************/
 
 #include "AppDelegate.h"
-#include "HelloWorldScene.h"
 #include "scene/TitleScene.h"
 
 // #define USE_AUDIO_ENGINE 1

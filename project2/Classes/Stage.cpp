@@ -70,6 +70,11 @@ bool Stage::init(const std::string& filename, cocos2d::Node* node)
 	this->setTiledMap(map);
 	this->scheduleUpdate();
 
+	// プレイヤーの設定
+	auto data = _tiledMap->getObjectGroup("player")->getObject("startPoint");
+	node->setPositionX(data["x"].asFloat());
+	node->setPositionY(data["y"].asFloat());
+
 	//auto size = cocos2d::Director::getInstance()->getVisibleSize();
 	//this->runAction(cocos2d::Follow::create(node/*, cocos2d::Rect(0, 0, size.width, size.height)*/));
 
