@@ -6,7 +6,7 @@
 #include "input/InputBase.h"
 
 // 重力
-const float gravity = 9;
+const float gravity = 12;
 
 struct ActModule;
 using ActFunc = std::function<bool(cocos2d::Sprite&, ActModule&,float&)>;

@@ -45,7 +45,10 @@ void ActionControl::Update(cocos2d::Sprite& sp,float dt)
 		if (check(sp, act.second,dt))
 		{
 			act.second._runAct(sp, act.second,dt);
-			_oldId = act.first;
+			if (_oldId != ACT_ID::JUMPING)
+			{
+				_oldId = act.first;
+			}
 			flag = true;
 
 			// ジャンプが終了したときの処理

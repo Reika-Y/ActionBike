@@ -1,4 +1,5 @@
 ﻿#include "Stage.h"
+#include "item/Item.h"
 
 // パス
 const std::string folder_path = "map/";
@@ -74,6 +75,20 @@ bool Stage::init(const std::string& filename, cocos2d::Node* node)
 	auto data = _tiledMap->getObjectGroup("player")->getObject("startPoint");
 	node->setPositionX(data["x"].asFloat());
 	node->setPositionY(data["y"].asFloat());
+
+	// アイテムの設置
+	auto items = _tiledMap->getObjectGroup("item")->getObjects();
+	auto batch = cocos2d::SpriteBatchNode::create("img/item.png");
+	addChild(batch);
+	for (auto item : items)
+	{
+		auto p = Item::create(batch->getTexture());
+		p->setAnchorPoint(cocos2d::Vec2::ANCHOR_BOTTOM_LEFT);
+		data = item.asValueMap();
+		p->setPositionX(data["x"].asFloat());
+		p->setPositionY(data["y"].asFloat());
+		addChild(p);
+	}
 
 	//auto size = cocos2d::Director::getInstance()->getVisibleSize();
 	//this->runAction(cocos2d::Follow::create(node/*, cocos2d::Rect(0, 0, size.width, size.height)*/));

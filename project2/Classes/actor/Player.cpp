@@ -5,7 +5,10 @@
 bool Player::init(void)
 {
 	_rect = cocos2d::Rect(0, 0, 64, 64);
-
+	auto sp = cocos2d::Sprite::create();
+	sp->setTextureRect(_rect);
+	sp->setAnchorPoint(cocos2d::Vec2::ANCHOR_BOTTOM_LEFT);
+	addChild(sp);
 	if (!cocos2d::Sprite::initWithFile("img/bike1.png"))
 	{
 		return false;
@@ -42,11 +45,11 @@ void Player::addModule(void)
 		ActModule run;
 		run._actID = ACT_ID::RUN;
 		run.white.emplace_back(ACT_ID::JUMP);
-		//run.white.emplace_back(ACT_ID::JUMPING);
+		run.white.emplace_back(ACT_ID::FALL);
 		run._actFuncList.emplace_back(CollisionCheck());
 		run._runAct = Move();
 		run._col.emplace_back(static_cast<int>(CORNER_POINT::RT));
-		run._col.emplace_back(static_cast<int>(CORNER_POINT::RD));
+		//run._col.emplace_back(static_cast<int>(CORNER_POINT::RD));
 		_act.AddModeule(run);
 	}
 	{
@@ -79,13 +82,12 @@ void Player::addModule(void)
 	{
 		// 落下
 		ActModule fall;
+		fall.white.emplace_back(ACT_ID::FALL);
 		fall._actID = ACT_ID::FALL;
 		fall._actFuncList.emplace_back(ModuleCheck());
 		fall._actFuncList.emplace_back(CollisionCheck());
 		fall._col.emplace_back(static_cast<int>(CORNER_POINT::BL));
 		fall._col.emplace_back(static_cast<int>(CORNER_POINT::BR));
-		fall._col.emplace_back(static_cast<int>(CORNER_POINT::LD));
-		fall._col.emplace_back(static_cast<int>(CORNER_POINT::RD));
 		fall._runAct = Fall();
 		_act.AddModeule(fall);
 	}

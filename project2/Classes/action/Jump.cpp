@@ -8,7 +8,7 @@ bool Jump::operator()(cocos2d::Sprite& sp, ActModule& act,float& dt)
 		return false;
 	}
 	dynamic_cast<Actor*>(&sp)->isJumping(true);
-	dynamic_cast<Actor*>(&sp)->accel(10);
+	dynamic_cast<Actor*>(&sp)->accel(7);
 
 	return true;
 }
