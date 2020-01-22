@@ -23,5 +23,6 @@ private:
 
 	bool _isGoal = false;
 	Player* player;
+	cocos2d::Camera* _cam;
 };
 

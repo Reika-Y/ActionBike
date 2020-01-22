@@ -58,11 +58,18 @@ void ActionControl::Update(cocos2d::Sprite& sp,float dt)
 				_oldId = ACT_ID::FALL;
 			}
 		}
+		else if (_oldId == ACT_ID::JUMPING && act.second._actID == ACT_ID::JUMPING)
+		{
+			// ジャンプ中に頭が当たった時
+			dynamic_cast<Actor*>(&sp)->isJumping(false);
+			actModeule[ACT_ID::FALL]._runAct(sp, actModeule[ACT_ID::FALL], dt);
+			_oldId = ACT_ID::FALL;
+		}
 	}
 	if (!flag)
 	{
 		_oldId = ACT_ID::IDLE;
-		actModeule[ACT_ID::IDLE]._runAct(sp, actModeule[ACT_ID::IDLE],dt);
+		actModeule[ACT_ID::IDLE]._runAct(sp, actModeule[ACT_ID::IDLE], dt);
 	}
 }
 

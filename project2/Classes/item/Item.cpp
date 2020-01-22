@@ -7,7 +7,7 @@ bool Item::init(cocos2d::Texture2D* t)
 		return false;
 	}
 
-	_score = 0;
+	_score = 10;
 
 	return true;
 }

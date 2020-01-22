@@ -1,5 +1,6 @@
 ﻿#include "TitleScene.h"
 #include "SelectScene.h"
+#include "../info/SoundInfo.h"
 
 cocos2d::Scene* TitleScene::createScene()
 {
@@ -32,6 +33,10 @@ bool TitleScene::init()
 	logo->setAnchorPoint(cocos2d::Vec2::ANCHOR_MIDDLE);
 	logo->setPosition(s_size / 2);
 	addChild(logo);
+
+	addChild(&SoundInfo::getInstance());
+	SoundInfo::getInstance().LoadStreamFile("sound/bgm/title.cks","title");
+	SoundInfo::getInstance().PlayStreamFile("title");
 
 	return true;
 }

@@ -1,6 +1,7 @@
 ﻿#include "SelectScene.h"
 #include "data/StageInfo.h"
 #include "GameScene.h"
+#include "../info/SoundInfo.h"
 
 cocos2d::Scene* SelectScene::createScene()
 {
@@ -28,6 +29,9 @@ bool SelectScene::init()
 	auto bg = cocos2d::Sprite::create("img/background/select.png");
 	bg->setAnchorPoint(cocos2d::Vec2::ANCHOR_BOTTOM_LEFT);
 	addChild(bg);
+
+	SoundInfo::getInstance().LoadStreamFile("sound/bgm/select.cks", "select");
+	SoundInfo::getInstance().PlayStreamFile("select");
 
 	return true;
 }

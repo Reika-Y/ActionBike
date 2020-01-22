@@ -1,6 +1,9 @@
 ﻿#include "Player.h"
 #include "../input/InputTouch.h"
 #include "../action/ActionDefinition.h"
+#include "../scene/GameScene.h"
+#include "../item/Item.h"
+#include "../info/ScoreInfo.h"
 
 bool Player::init(void)
 {
@@ -26,8 +29,20 @@ bool Player::init(void)
 
 void Player::update(float dt)
 {
+	getBoundingBox();
 	SetCornerPoint(_rect);
 	_act.Update(*this, dt);
+
+	//auto stage = dynamic_cast<GameScene*>(cocos2d::Director::getInstance()->getRunningScene())->getstage();
+	//for (auto rect : stage->getItemList())
+	//{
+	//	if (_rect.intersectsRect(rect->getTextureRect()))
+	//	{
+	//		ScoreInfo::getInstance()->AddScore(rect->GetScore());
+	//		rect->release();
+	//	}
+	//}
+
 	_input->update();
 }
 
@@ -37,6 +52,7 @@ void Player::addModule(void)
 		// アイドル
 		ActModule idle;
 		idle._actID = ACT_ID::IDLE;
+		idle.white.emplace_back(ACT_ID::JUMP);
 		idle._runAct = Idle();
 		_act.AddModeule(idle);	
 	}
@@ -47,6 +63,7 @@ void Player::addModule(void)
 		run.white.emplace_back(ACT_ID::JUMP);
 		run.white.emplace_back(ACT_ID::FALL);
 		run._actFuncList.emplace_back(CollisionCheck());
+		//run._actFuncList.emplace_back(OnGround());
 		run._runAct = Move();
 		run._col.emplace_back(static_cast<int>(CORNER_POINT::RT));
 		//run._col.emplace_back(static_cast<int>(CORNER_POINT::RD));

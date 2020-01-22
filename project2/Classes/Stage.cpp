@@ -1,5 +1,4 @@
 ﻿#include "Stage.h"
-#include "item/Item.h"
 
 // パス
 const std::string folder_path = "map/";
@@ -50,6 +49,11 @@ void Stage::update(float dt)
 {
 }
 
+std::list<Item*> Stage::getItemList(void)
+{
+	return itemList;
+}
+
 Stage::Stage():_tiledMap(nullptr)
 {
 }
@@ -77,6 +81,7 @@ bool Stage::init(const std::string& filename, cocos2d::Node* node)
 	node->setPositionY(data["y"].asFloat());
 
 	// アイテムの設置
+	itemList.clear();
 	auto items = _tiledMap->getObjectGroup("item")->getObjects();
 	auto batch = cocos2d::SpriteBatchNode::create("img/item.png");
 	addChild(batch);
@@ -87,11 +92,9 @@ bool Stage::init(const std::string& filename, cocos2d::Node* node)
 		data = item.asValueMap();
 		p->setPositionX(data["x"].asFloat());
 		p->setPositionY(data["y"].asFloat());
+		itemList.emplace_back(p);
 		addChild(p);
 	}
-
-	//auto size = cocos2d::Director::getInstance()->getVisibleSize();
-	//this->runAction(cocos2d::Follow::create(node/*, cocos2d::Rect(0, 0, size.width, size.height)*/));
 
 	return true;
 }

@@ -166,6 +166,7 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)\Resources\" /D /E /I /F /Y
     <ClCompile Include="..\Classes\action\Jumping.cpp" />
     <ClCompile Include="..\Classes\action\ModuleCheck.cpp" />
     <ClCompile Include="..\Classes\action\Move.cpp" />
+    <ClCompile Include="..\Classes\action\OnGround.cpp" />
     <ClCompile Include="..\Classes\action\Turn.cpp" />
     <ClCompile Include="..\Classes\actor\Actor.cpp" />
     <ClCompile Include="..\Classes\actor\Player.cpp" />
@@ -201,6 +202,7 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)\Resources\" /D /E /I /F /Y
     <ClInclude Include="..\Classes\action\Jumping.h" />
     <ClInclude Include="..\Classes\action\ModuleCheck.h" />
     <ClInclude Include="..\Classes\action\Move.h" />
+    <ClInclude Include="..\Classes\action\OnGround.h" />
     <ClInclude Include="..\Classes\action\Turn.h" />
     <ClInclude Include="..\Classes\actor\Actor.h" />
     <ClInclude Include="..\Classes\actor\Player.h" />

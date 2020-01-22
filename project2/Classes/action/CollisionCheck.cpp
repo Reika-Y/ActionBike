@@ -37,7 +37,6 @@ bool CollisionCheck::operator()(cocos2d::Sprite& sp, ActModule& act,float& dt)
 		n = layer->getTileGIDAt(cocos2d::Vec2(x, y));
 		if (n != 0)
 		{
-			dynamic_cast<Actor&>(sp).isJumping(false);
 			return false;
 		}
 	}
