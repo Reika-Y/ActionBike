@@ -8,13 +8,24 @@ bool Item::init(cocos2d::Texture2D* t)
 	}
 
 	_score = 10;
+	_isErace = false;
 
 	return true;
 }
 
-const int Item::GetScore(void)
+const int Item::Score(void)
 {
 	return _score;
+}
+
+bool Item::IsErace(void)
+{
+	return _isErace;
+}
+
+void Item::IsErace(bool flag)
+{
+	_isErace = flag;
 }
 
 Item* Item::create(cocos2d::Texture2D* t)

@@ -49,14 +49,19 @@ void Actor::accel(float num)
 	_accel = num;
 }
 
+ACT_ID Actor::getActId(void)
+{
+	return _act.GetOldModule()._actID;
+}
+
 void Actor::SetCornerPoint(cocos2d::Rect rect)
 {
-	_corner[static_cast<int>(CORNER_POINT::LD)] = rect.origin + _position + cocos2d::Vec2(-1, 1);
-	_corner[static_cast<int>(CORNER_POINT::LT)] = rect.origin + _position + cocos2d::Vec2(-1, rect.size.height - 1);
+	_corner[static_cast<int>(CORNER_POINT::LD)] = rect.origin + _position + cocos2d::Vec2(-1, 0);
+	_corner[static_cast<int>(CORNER_POINT::LT)] = rect.origin + _position + cocos2d::Vec2(-1, rect.size.height);
 	_corner[static_cast<int>(CORNER_POINT::RD)] = rect.origin + _position + cocos2d::Vec2(rect.size.width + 1, 0);
-	_corner[static_cast<int>(CORNER_POINT::RT)] = rect.origin + _position + cocos2d::Vec2(rect.size.width + 1, rect.size.height - 1);
-	_corner[static_cast<int>(CORNER_POINT::TL)] = rect.origin + _position + cocos2d::Vec2(1, rect.size.height + 1);
-	_corner[static_cast<int>(CORNER_POINT::TR)] = rect.origin + _position + cocos2d::Vec2(rect.size.width - 1, rect.size.height + 1);
+	_corner[static_cast<int>(CORNER_POINT::RT)] = rect.origin + _position + cocos2d::Vec2(rect.size.width + 1, rect.size.height);
+	_corner[static_cast<int>(CORNER_POINT::TL)] = rect.origin + _position + cocos2d::Vec2(0, rect.size.height + 1);
+	_corner[static_cast<int>(CORNER_POINT::TR)] = rect.origin + _position + cocos2d::Vec2(rect.size.width, rect.size.height + 1);
 	_corner[static_cast<int>(CORNER_POINT::BL)] = rect.origin + _position + cocos2d::Vec2(0, -1);
 	_corner[static_cast<int>(CORNER_POINT::BR)] = rect.origin + _position + cocos2d::Vec2(rect.size.width, -1);
 }

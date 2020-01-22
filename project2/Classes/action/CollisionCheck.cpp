@@ -37,6 +37,10 @@ bool CollisionCheck::operator()(cocos2d::Sprite& sp, ActModule& act,float& dt)
 		n = layer->getTileGIDAt(cocos2d::Vec2(x, y));
 		if (n != 0)
 		{
+			if (dynamic_cast<Actor*>(&sp)->getActId() == ACT_ID::FALL)
+			{
+				sp.setPositionY((mapSize.height - y)*tileSize.height + 1);
+			}
 			return false;
 		}
 	}

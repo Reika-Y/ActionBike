@@ -8,10 +8,10 @@
 bool Player::init(void)
 {
 	_rect = cocos2d::Rect(0, 0, 64, 64);
-	auto sp = cocos2d::Sprite::create();
-	sp->setTextureRect(_rect);
-	sp->setAnchorPoint(cocos2d::Vec2::ANCHOR_BOTTOM_LEFT);
-	addChild(sp);
+	//auto sp = cocos2d::Sprite::create();
+	//sp->setTextureRect(_rect);
+	//sp->setAnchorPoint(cocos2d::Vec2::ANCHOR_BOTTOM_LEFT);
+	//addChild(sp);
 	if (!cocos2d::Sprite::initWithFile("img/bike1.png"))
 	{
 		return false;
@@ -31,17 +31,22 @@ void Player::update(float dt)
 {
 	getBoundingBox();
 	SetCornerPoint(_rect);
+	// 状態更新
 	_act.Update(*this, dt);
 
-	//auto stage = dynamic_cast<GameScene*>(cocos2d::Director::getInstance()->getRunningScene())->getstage();
-	//for (auto rect : stage->getItemList())
-	//{
-	//	if (_rect.intersectsRect(rect->getTextureRect()))
-	//	{
-	//		ScoreInfo::getInstance()->AddScore(rect->GetScore());
-	//		rect->release();
-	//	}
-	//}
+	// アイテムとの接触判定
+	auto stage = dynamic_cast<GameScene*>(cocos2d::Director::getInstance()->getRunningScene())->getstage();
+	for (auto rect : stage->getItemList())
+	{
+		if (getBoundingBox().intersectsRect(rect->getBoundingBox()))
+		{
+			if (!rect->IsErace())
+			{
+				ScoreInfo::getInstance()->AddScore(rect->Score());
+				rect->IsErace(true);
+			}
+		}
+	}
 
 	_input->update();
 }
@@ -66,7 +71,7 @@ void Player::addModule(void)
 		//run._actFuncList.emplace_back(OnGround());
 		run._runAct = Move();
 		run._col.emplace_back(static_cast<int>(CORNER_POINT::RT));
-		//run._col.emplace_back(static_cast<int>(CORNER_POINT::RD));
+		run._col.emplace_back(static_cast<int>(CORNER_POINT::RD));
 		_act.AddModeule(run);
 	}
 	{

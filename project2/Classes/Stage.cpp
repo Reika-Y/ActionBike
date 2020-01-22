@@ -1,4 +1,5 @@
 ﻿#include "Stage.h"
+#include <algorithm>
 
 // パス
 const std::string folder_path = "map/";
@@ -47,6 +48,14 @@ Stage* Stage::createStageWithNumber(int num, cocos2d::Node* node)
 
 void Stage::update(float dt)
 {
+	for (auto item : itemList)
+	{
+		if (item->IsErace())
+		{
+			removeChild(item);
+		}
+	}
+	itemList.erase(std::remove_if(itemList.begin(), itemList.end(), [](Item* item) {return item->IsErace(); }), itemList.end());
 }
 
 std::list<Item*> Stage::getItemList(void)
@@ -95,6 +104,6 @@ bool Stage::init(const std::string& filename, cocos2d::Node* node)
 		itemList.emplace_back(p);
 		addChild(p);
 	}
-
+	scheduleUpdate();
 	return true;
 }

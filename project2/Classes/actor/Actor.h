@@ -33,6 +33,7 @@ public:
 	void isJumping(bool flag);
 	float accel(void);
 	void accel(float num);
+	ACT_ID getActId(void);
 private:
 protected:
 	explicit Actor();
