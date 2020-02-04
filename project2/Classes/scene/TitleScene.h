@@ -9,5 +9,8 @@ public:
 	CREATE_FUNC(TitleScene);
 private:
 	void ChangeScene(cocos2d::Ref* pSender);
+	void CloseLayer(cocos2d::Ref* pSender);
+
+	cocos2d::Layer* closeLayer;		// 終了確認ウィンドウ用
 };
 

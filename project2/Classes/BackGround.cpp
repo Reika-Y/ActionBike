@@ -32,7 +32,7 @@ void BackGround::update(float dt)
 {
 	for (auto data : _data)
 	{
-		data._sprite->setPosition((data._sprite->getPosition().x - data._speed), 0);
+		data._sprite->setPosition((data._sprite->getPosition().x - data._speed * dt), 0);
 		if (data._sprite->getPosition().x + data._sprite->getContentSize().width <= 0)
 		{
 			data._sprite->setPosition(data._sprite->getContentSize().width * (data.num - 1), 0);

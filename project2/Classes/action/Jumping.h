@@ -1,6 +1,6 @@
 ﻿#pragma once
+#include <cocos2d.h>
 
-class cocos2d::Sprite;
 struct ActModule;
 
 struct Jumping

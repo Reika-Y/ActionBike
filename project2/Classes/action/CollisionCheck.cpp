@@ -4,6 +4,8 @@
 #include "../scene/GameScene.h"
 #include "../actor/Actor.h"
 
+const int id[] = { 4,39 };
+
 bool CollisionCheck::operator()(cocos2d::Sprite& sp, ActModule& act,float& dt)
 {
 	auto stage = dynamic_cast<GameScene*>(cocos2d::Director::getInstance()->getRunningScene())->getstage();
@@ -37,11 +39,13 @@ bool CollisionCheck::operator()(cocos2d::Sprite& sp, ActModule& act,float& dt)
 		n = layer->getTileGIDAt(cocos2d::Vec2(x, y));
 		if (n != 0)
 		{
+			// 補正
 			if (dynamic_cast<Actor*>(&sp)->getActId() == ACT_ID::FALL)
 			{
 				sp.setPositionY((mapSize.height - y)*tileSize.height + 1);
 			}
 			return false;
+
 		}
 	}
 	return true;

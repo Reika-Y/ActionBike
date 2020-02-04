@@ -1,4 +1,4 @@
-#/****************************************************************************
+﻿#/****************************************************************************
 # Copyright (c) 2013-2014 cocos2d-x.org
 # Copyright (c) 2015-2017 Chukong Technologies Inc.
 #
@@ -29,12 +29,14 @@ set(APP_NAME project2)
 
 project(${APP_NAME})
 
-include(AndroidNdkModules)
-android_ndk_import_module_cpufeatures()
+if(ANDROID)
+	include(AndroidNdkModules)
+	android_ndk_import_module_cpufeatures()
 
-include_directories(D:/ToolFile/cricket/cricket-1.6.7/inc)
-link_directories(D:/ToolFile/cricket/cricket-1.6.7/lib/android/ndk/${ANDROID_ABI}/debug)
-link_libraries(D:/ToolFile/cricket/cricket-1.6.7/lib/android/ndk/${ANDROID_ABI}/debug/libck.a)
+	include_directories(D:/ToolFile/cricket/cricket-1.6.7/inc)
+	link_directories(D:/ToolFile/cricket/cricket-1.6.7/lib/android/ndk/${ANDROID_ABI}/debug)
+	link_libraries(D:/ToolFile/cricket/cricket-1.6.7/lib/android/ndk/${ANDROID_ABI}/debug/libck.a)
+endif()
 
 set(COCOS2DX_ROOT_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cocos2d)
 set(CMAKE_MODULE_PATH ${COCOS2DX_ROOT_PATH}/cmake/Modules/)
@@ -78,12 +80,19 @@ list(APPEND GAME_SOURCE
      Classes/info/SoundInfo.cpp
 #input
      Classes/input/InputTouch.cpp
+#item
+     Classes/item/Item.cpp
 #scene
      Classes/scene/GameScene.cpp
      Classes/scene/PauseScene.cpp
      Classes/scene/ResultScene.cpp
      Classes/scene/SelectScene.cpp
      Classes/scene/TitleScene.cpp
+#shader
+     Classes/shader/Shaders.cpp
+#transition
+     Classes/transition/PatternTransitionLayer.cpp
+     Classes/transition/TransitionPattern.cpp
 #etc
      Classes/AppDelegate.cpp
      Classes/BackGround.cpp
@@ -91,6 +100,7 @@ list(APPEND GAME_SOURCE
      Classes/ActionControl.cpp
      Classes/AnimInfo.cpp
      Classes/Number.cpp
+     Classes/Ground.cpp
      )
 list(APPEND GAME_HEADER
      Classes/action/ActionDefinition.h
@@ -114,6 +124,14 @@ list(APPEND GAME_HEADER
      Classes/info/SoundInfo.h
      Classes/input/InputBase.h
      Classes/input/InputTouch.h
+#item
+     Classes/item/Item.h
+#shader
+     Classes/shader/Shaders.h
+#transition
+     Classes/transition/PatternTransitionLayer.h
+     Classes/transition/TransitionPattern.h
+
      Classes/scene/GameScene.h
      Classes/scene/PauseScene.h
      Classes/scene/ResultScene.h
@@ -125,6 +143,7 @@ list(APPEND GAME_HEADER
      Classes/ActionControl.h
      Classes/AnimInfo.h
      Classes/Number.h
+     Classes/Ground.h
      )
 
 if(ANDROID)

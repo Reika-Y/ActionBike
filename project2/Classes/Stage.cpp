@@ -1,5 +1,7 @@
 ﻿#include "Stage.h"
 #include <algorithm>
+#include "info/EffectInfo.h"
+#include "Ground.h"
 
 // パス
 const std::string folder_path = "map/";
@@ -52,6 +54,7 @@ void Stage::update(float dt)
 	{
 		if (item->IsErace())
 		{
+			EffectInfo::getInstance()->Play("effect/star", cocos2d::Vec3::ZERO, item->getPosition());
 			removeChild(item);
 		}
 	}
@@ -65,6 +68,7 @@ std::list<Item*> Stage::getItemList(void)
 
 Stage::Stage():_tiledMap(nullptr)
 {
+	EffectInfo::getInstance()->LoadEffect("effect/star",3);
 }
 
 Stage::~Stage()
@@ -83,6 +87,8 @@ bool Stage::init(const std::string& filename, cocos2d::Node* node)
 	this->addChild(map);
 	this->setTiledMap(map);
 	this->scheduleUpdate();
+
+	auto tmp = Ground::create(map);
 
 	// プレイヤーの設定
 	auto data = _tiledMap->getObjectGroup("player")->getObject("startPoint");

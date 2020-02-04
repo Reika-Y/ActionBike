@@ -62,6 +62,13 @@ bool SoundInfo::PlayStreamFile(std::string key, int loopCount)
 	{
 		return false;
 	}
+	for (auto sound:_bgms)
+	{
+		if (sound.first != key && sound.second->isPlaying())
+		{
+			sound.second->stop();
+		}
+	}
 	_bgms[key]->setLoopCount(loopCount);
 	_bgms[key]->play();
 	return true;
@@ -115,7 +122,9 @@ SoundInfo::SoundInfo()
 	CkConfig config;
 	CkInit(&config);
 #endif
-	scheduleUpdate();
+	cocos2d::Director::getInstance()->getScheduler()->schedule(schedule_selector(SoundInfo::update),this,0,false);
+	_bgms.clear();
+	_ses.clear();
 }
 
 SoundInfo::~SoundInfo()

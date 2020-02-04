@@ -1,5 +1,4 @@
 ﻿#include "SelectScene.h"
-#include "data/StageInfo.h"
 #include "GameScene.h"
 #include "../info/SoundInfo.h"
 

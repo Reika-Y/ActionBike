@@ -6,6 +6,7 @@
 #include "../effekseer/Effekseer.h"
 
 using EffectList =std::map<std::string, efk::Effect*>;
+using EmmitData = std::pair<efk::EffectEmitter*, float>;
 
 class EffectInfo:public cocos2d::Node
 {
@@ -21,6 +22,6 @@ private:
 	EffectInfo();
 	EffectList _effectList;
 	efk::EffectManager* _manager;
-	std::list<efk::EffectEmitter*> _emitters;
+	std::list<EmmitData> _emitters;
 };
 

@@ -24,6 +24,7 @@ bool Player::init(void)
 	_isDie = false;
 
 	addModule();
+
 	return true;
 }
 

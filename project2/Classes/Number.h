@@ -1,5 +1,6 @@
 ﻿#pragma once
 #include <cocos2d.h>
+#include <string>
 
 // 数字を画像で表示するクラス
 class Number:public cocos2d::Sprite
@@ -18,6 +19,8 @@ private:
 	void CreateNumber(int num);
 	// 数字をクリア
 	void RemoveNumber(void);
+
+	std::string _prefix;
 
 	int _num;
 	int _span;

@@ -14,6 +14,6 @@ struct InputTouch :
 private:
 	InputTouch();
 	~InputTouch();
-	bool init();
+	bool init(void)override;
 };
 

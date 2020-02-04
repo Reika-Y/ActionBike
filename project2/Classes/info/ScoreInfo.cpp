@@ -34,6 +34,7 @@ bool ScoreInfo::AddScore(int num)
 
 void ScoreInfo::update(float dt)
 {
+	// スコア更新
 	_number->setNumber(_scoreNum);
 }
 
@@ -41,6 +42,8 @@ ScoreInfo::ScoreInfo()
 {
 	_scoreNum = 0;
 	_highScore = 0;
+
+	// 数字の設定
 	_number = Number::create();
 	_number->setAnchorPoint(cocos2d::Vec2::ANCHOR_BOTTOM_LEFT);
 	_number->setPosition(200, 500);

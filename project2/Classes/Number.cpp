@@ -3,6 +3,7 @@
 // 数字の画像ファイル名の設定
 void Number::setPrefix(std::string prefix)
 {
+	_prefix = prefix;
 	auto str = cocos2d::__String::createWithFormat("img/ui/number/%s.plist", prefix.c_str());
 	cache->addSpriteFramesWithFile(str->getCString());
 }
@@ -68,7 +69,7 @@ void Number::CreateNumber(int num)
 	for (int i = 0; i < length; i++)
 	{
 		auto charFigure = number.substr(length - 1 - i, 1);
-		std::string imageFile = cocos2d::StringUtils::format("%s.png", charFigure.c_str());
+		std::string imageFile = cocos2d::StringUtils::format("%s_%s.png",_prefix.c_str(), charFigure.c_str());
 		auto figure = Sprite::createWithSpriteFrame(cache->getSpriteFrameByName(imageFile));
 		figure->setPosition(cocos2d::Point(baseX - i * _span, 0));
 		figure->setTag(i + 1);

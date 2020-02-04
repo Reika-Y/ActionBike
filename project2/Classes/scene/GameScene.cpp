@@ -2,6 +2,7 @@
 #include "BackGround.h"
 #include "ResultScene.h"
 #include "../info/ScoreInfo.h"
+#include "../info/EffectInfo.h"
 
 cocos2d::Scene* GameScene::createScene()
 {
@@ -55,6 +56,8 @@ bool GameScene::init()
 	// マスク
 	_cam->setCameraFlag(cocos2d::CameraFlag::USER1);
 
+	//addChild(EffectInfo::getInstance());
+
 	scheduleUpdate();
 	return true;
 }
@@ -99,4 +102,11 @@ void GameScene::ChangeScene(float millsecond)
 {
 	auto scene = ResultScene::createScene();
 	cocos2d::Director::getInstance()->replaceScene(scene);
+}
+
+void GameScene::visit(cocos2d::Renderer* renderer, const cocos2d::Mat4& parentTransform, uint32_t parentFlags)
+{
+	EffectInfo::getInstance()->begin(renderer, _globalZOrder);
+	cocos2d::Scene::visit(renderer, parentTransform, parentFlags);
+	EffectInfo::getInstance()->end(renderer, _globalZOrder);
 }
