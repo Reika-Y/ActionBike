@@ -4,7 +4,8 @@
 #include "../scene/GameScene.h"
 #include "../actor/Actor.h"
 
-const int id[] = { 4,39 };
+// 斜面のid
+const int id[] = { 5,40 };
 
 bool CollisionCheck::operator()(cocos2d::Sprite& sp, ActModule& act,float& dt)
 {
@@ -39,6 +40,13 @@ bool CollisionCheck::operator()(cocos2d::Sprite& sp, ActModule& act,float& dt)
 		n = layer->getTileGIDAt(cocos2d::Vec2(x, y));
 		if (n != 0)
 		{
+			//for (int i = 0; i < 2; i++)
+			//{
+			//	if (id[i] == n)
+			//	{
+			//		return true;
+			//	}
+			//}
 			// 補正
 			if (dynamic_cast<Actor*>(&sp)->getActId() == ACT_ID::FALL)
 			{

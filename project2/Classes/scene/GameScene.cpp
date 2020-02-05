@@ -58,6 +58,12 @@ bool GameScene::init()
 
 	//addChild(EffectInfo::getInstance());
 
+	// 待機
+	auto sp = cocos2d::Sprite::create("img/ui/ready.png");
+	sp->setAnchorPoint(cocos2d::Vec2::ANCHOR_MIDDLE);
+	sp->setPosition(visibleSize / 2);
+	addChild(sp,50);
+
 	scheduleUpdate();
 	return true;
 }
@@ -85,6 +91,7 @@ void GameScene::isGoal(bool flag)
 
 void GameScene::update(float dt)
 {
+
 	//_cam->setPositionX(_cam->getPositionX() + 120.f * dt);
 	// ゴールした時
 	//if (_isGoal)

@@ -48,7 +48,7 @@ ScoreInfo::ScoreInfo()
 	_number->setAnchorPoint(cocos2d::Vec2::ANCHOR_BOTTOM_LEFT);
 	_number->setPosition(200, 500);
 	_number->setSpan(40);
-	_number->setPrefix("number");
+	_number->setPrefix("score");
 	addChild(_number);
 
 	this->autorelease();

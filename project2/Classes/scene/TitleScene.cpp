@@ -30,8 +30,8 @@ bool TitleScene::init()
 	config->setPosition(s_size);
 
 	auto startButton = cocos2d::MenuItemImage::create(
-		"img/ui/button1.png",
-		"img/ui/button2.png",
+		"img/ui/button/startButton1.png",
+		"img/ui/button/startButton2.png",
 		CC_CALLBACK_1(TitleScene::ChangeScene, this));
 	startButton->setPosition(cocos2d::Vec2(s_size.width/2, 200));
 
@@ -41,28 +41,18 @@ bool TitleScene::init()
 
 	// 背景
 	auto bg = BackGround::create();
-	bg->AddImage("img/background/title/sky.png", 0);
-	bg->AddImage("img/background/title/cloudy.png", 10);
-	bg->AddImage("img/background/title/hill.png", 30);
+	bg->AddImage("img/background/title/background.png", 30);
 	addChild(bg);
 
 	// タイトルロゴ
 	auto logo = cocos2d::Sprite::create("img/title-logo.png");
 	logo->setAnchorPoint(cocos2d::Vec2::ANCHOR_MIDDLE);
-	logo->setPosition(s_size / 2);
+	logo->setPosition(s_size.width / 2,350);
 	addChild(logo);
 
 	// BGM
 	SoundInfo::getInstance().LoadStreamFile("sound/bgm/title.cks","title");
 	SoundInfo::getInstance().PlayStreamFile("title");
-
-	closeLayer = cocos2d::Layer::create();
-	addChild(closeLayer, 300);
-	auto f_font = cocos2d::Sprite::create("img/ui/font1.png");
-	f_font->setAnchorPoint(cocos2d::Vec2::ANCHOR_MIDDLE);
-	f_font->setPosition(s_size / 2);
-	closeLayer->addChild(f_font);
-	closeLayer->setVisible(false);
 
 	return true;
 }
@@ -73,7 +63,7 @@ void TitleScene::ChangeScene(cocos2d::Ref* pSender)
 	// 次のシーン
 	auto scene = SelectScene::createScene();
 	// トランジション設定
-	auto transition = TransitionPattern::create(2.0f, scene, "img/pattern.png", true);
+	auto transition = TransitionPattern::create(1.0f, scene, "img/pattern.png", true);
 	// シーン置き換え
 	cocos2d::Director::getInstance()->replaceScene(transition);
 }

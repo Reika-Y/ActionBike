@@ -18,7 +18,7 @@ bool Player::init(void)
 	}
 	_input = InputTouch::create();
 	addChild(_input);
-	this->scheduleUpdate();
+	//this->scheduleUpdate();
 	setAnchorPoint(cocos2d::Vec2::ANCHOR_BOTTOM_LEFT);
 
 	_isDie = false;
